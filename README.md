@@ -23,6 +23,7 @@ Design your very own CRUD app using Spring. It must support user authentication 
 
 ## Hard Mode
 * Add JavaScript and CSS (served statically via `resources/static`).
+* Add tests for all GET routes
 
 ## Resources
 * [Github Repo](https://github.com/tiy-lv-java-2016-06/spring-crud)
