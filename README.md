@@ -29,3 +29,4 @@ Design your very own CRUD app using Spring. It must support user authentication 
 * [Github Repo](https://github.com/tiy-lv-java-2016-06/spring-crud)
 * [Java Time Tutorial](http://www.tutorialspoint.com/java8/java8_datetime_api.htm)
 * [MockMVC](http://docs.spring.io/spring/docs/current/javadoc-api/org/springframework/test/web/servlet/MockMvc.html)
+* [Password Hasher](https://raw.githubusercontent.com/defuse/password-hashing/master/PasswordStorage.java)
