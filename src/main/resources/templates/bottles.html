@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Bottle</title>
+</head>
+<body>
+    <form action="/edit-bottle" method="post">
+        <input type="text" placeholder="Bottle name" value="{{bottle.name}}" name="bottleName" width="150">
+        <select name="bottleProducer">
+            <option selected value="pm">Phillipe Melka</option>
+            <option value="gallo">Gallo</option>
+        </select>
+        <select name="bottleRegion">
+            <option selected value="napa">Napa Valley</option>
+            <option value="bordeaux">Bordeaux</option>
+            <option value="beaujolais">Beaujolais</option>
+            <option value="sonoma">Sonoma County</option>
+            <option value="walla">Walla Walla</option>
+        </select>
+        <select name="bottleVintage">
+            <option selected value="1990">1990</option>
+            <option value="1991">1991</option>
+            <option value="1992">1992</option>
+            <option value="1993">1993</option>
+            <option value="1994">1994</option>
+        </select>
+        <select name="bottleVariety">
+            <option selected value="Riesling">Riesling</option>
+            <option value="Pinot Gris">Pinot Gris</option>
+            <option value="Sauvignon Blanc">Sauvignon Blanc</option>
+            <option value="Chardonnay">Chardonnay</option>
+            <option value="Pinot Noir">Pinot Noir</option>
+            <option value="Zinfandel">Zinfandel</option>
+            <option value="Syrah">Syrah</option>
+            <option value="Cabernet">Cabernet Sauvignon</option>
+        </select>
+        <select name="bottleABV">
+            <option selected value="5.5">5.5%</option>
+            <option value="10">10%</option>
+            <option value="11.5">11.5%</option>
+            <option value="14">14%</option>
+            <option value="21">21%</option>
+        </select>
+        <input type="hidden" value="{{id}}" name="id"/>
+        <button type="submit">Update</button>
+    </form>
+
+</body>
+</html>
