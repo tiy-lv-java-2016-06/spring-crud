@@ -17,6 +17,7 @@ import org.springframework.web.context.WebApplicationContext;
 
 import javax.servlet.http.HttpSession;
 
+import static junit.framework.TestCase.assertEquals;
 import static junit.framework.TestCase.assertTrue;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -60,37 +61,75 @@ public class SpringAwwCrudApplicationTests {
 
 	@Test
 	public void testCreateCar() throws Exception {
+		User testUser = new User("testUser", "password");
+		users.save(testUser);
+		String testDrivetrain = "FR";
+		String testMake = "Porsche";
+		String testModel = "Cayman";
+		int year = 2005;
+		Car testCar = new Car(testDrivetrain, testMake, testModel, year, testUser);
+		cars.save(testCar);
+
 		mockMvc.perform(
 				MockMvcRequestBuilders.post("/create-car")
 				.param("year", "2005")
 				.param("make", "testyear")
 				.param("model", "testModel")
-				.param("drivetrain", "testdrivetrain")
+				.param("drivetrain", "testDrivetrain")
 		).andExpect(MockMvcResultMatchers.status().is3xxRedirection());
+		Car checkCar = cars.findOne(testCar.getId());
+		assertEquals("drivetrain not created", testDrivetrain, testCar.getDrivetrain());
+		assertEquals("id not equal", testCar.getId(), checkCar.getId());
+		assertEquals("make not created", testMake, checkCar.getMake());
+		assertEquals("model not created", testModel, checkCar.getModel());
+		assertEquals("year not created", 2005, checkCar.getYear());
 	}
 
 	@Test
 	public void testEdit() throws Exception {
+		User testUser = new User("testUser", "password");
+		users.save(testUser);
+		String testDrivetrain = "FR";
+		String testMake = "Porsche";
+		String testModel = "Cayman";
+		int year = 2005;
+		Car testCar = new Car(testDrivetrain, testMake, testModel, year, testUser);
+		cars.save(testCar);
+
 		mockMvc.perform(
 				MockMvcRequestBuilders.post("/edit")
 					.param("carId", "1")
-					.param("drivetrain", "4WD")
+					.param("drivetrain", "testDrivetrain")
 					.param("make", "testMake")
 					.param("model", "testModel")
-					.param("year", "testYear")
+					.param("year", "2005")
 		).andExpect(MockMvcResultMatchers.status().is3xxRedirection());
 
-		assertTrue(users.count() == 1);
+		assertTrue(cars.count() == 1);
+		Car checkCar = cars.findOne(testCar.getId());
+		assertEquals("drivetrain not changed", "testDrivetrain", checkCar.getDrivetrain());
+		assertEquals("id not equal", 1, checkCar.getId());
+		assertEquals("make not changed", "testMake", checkCar.getMake());
+		assertEquals("model not changed", "testModel", checkCar.getModel());
+		assertEquals("year not changed", 2005, checkCar.getYear());
 	}
 
 	@Test
 	public void testDelete() throws Exception {
+		User testUser = new User("testUser", "password");
+		users.save(testUser);
+		String testDrivetrain = "FR";
+		String testMake = "Porsche";
+		String testModel = "Cayman";
+		int year = 2005;
+		Car testCar = new Car(testDrivetrain, testMake, testModel, year, testUser);
+		cars.save(testCar);
+		String idString = String.valueOf(testCar.getId());
 		mockMvc.perform(
 				MockMvcRequestBuilders.post("/delete")
-				.param("carId", "1")
+				.param("carId", idString)
 
 		).andExpect(MockMvcResultMatchers.status().is3xxRedirection());
 
-		assertTrue(users.count() == 1);
 	}
 }

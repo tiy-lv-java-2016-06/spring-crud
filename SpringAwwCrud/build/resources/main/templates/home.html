@@ -2,18 +2,18 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="bootstrap.min.css">
     <title>Welcome to my C.R.U.D. Program</title>
 </head>
     <body>
-        {{^userName}}
-        <div >
+    <div class="container">
+    {{^userName}}
             <form action="/login" method="post">
                 <h1>Welcome to: Aww Crud</h1>
                 <input type="text" placeholder="Enter Username" name="userName">
                 <input type= "password" placeholder="Enter Password" name="password">
                 <button type="submit">Login</button>
             </form>
-        </div>
         {{/userName}}
 
         {{#userName}}
@@ -51,6 +51,6 @@
             <li>{{make}} - {{model}} - {{drivetrain}} - {{year}} - {{user.getName}}</li>
             {{/othersCars}}
         </ul>
-
+    </div>
     </body>
 </html>
