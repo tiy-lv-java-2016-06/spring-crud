@@ -37,7 +37,7 @@
         <option selected value="Sauvignon Blanc">Sauvignon Blanc</option>
         <option selected value="Chardonnay">Chardonnay</option>
         <option selected value="Pinot Noir">Pinot Noir</option>
-        <option selected value="Zin">Zinfandel</option>
+        <option selected value="Zinfandel">Zinfandel</option>
         <option selected value="Syrah">Syrah</option>
         <option selected value="Cabernet">Cabernet Sauvignon</option>
     </select>
@@ -55,10 +55,7 @@
 <ol>
     {{#userBottleList}}
     <li>{{name}} - {{producer}} - {{region}} - {{vintage}} - {{variety}} - {{abv}}</li>
-    <form action="/edit-bottle" method="post">
-        <input type="hidden" value="{{id}}" name="id"/>
         <a href="/edit-bottle?id={{id}}">Edit Bottle</a>
-    </form>
     <form action="/delete-bottle" method="post">
         <input type="hidden" value="{{id}}" name="id"/>
         <button type="submit">Delete Bottle</button>

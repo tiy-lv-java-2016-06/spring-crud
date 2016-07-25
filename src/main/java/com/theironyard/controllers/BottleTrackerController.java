@@ -46,6 +46,18 @@ public class BottleTrackerController {
         return "home";
     }
 
+    /**
+     * Add new bottle
+     * @param session
+     * @param bottleName
+     * @param bottleProducer
+     * @param bottleRegion
+     * @param bottleVintage
+     * @param bottleVariety
+     * @param bottleABV
+     * @return
+     * @throws Exception
+     */
     @RequestMapping(path="/create-bottle", method = RequestMethod.POST)
     public String createBottle(HttpSession session, String bottleName, String bottleProducer, String bottleRegion,
                                int bottleVintage, String bottleVariety, float bottleABV) throws Exception {
@@ -61,6 +73,13 @@ public class BottleTrackerController {
         return "redirect:/";
     }
 
+    /**
+     * Delete bottle
+     * @param session
+     * @param id
+     * @return
+     * @throws Exception
+     */
     @RequestMapping(path = "/delete-bottle", method = RequestMethod.POST)
     public String deleteBottle(HttpSession session, Integer id) throws Exception {
 
@@ -74,12 +93,34 @@ public class BottleTrackerController {
         return "redirect:/";
     }
 
+    /**
+     * Pull in bottle id and go to edit bottle page
+     * @param model
+     * @param id
+     * @return
+     */
     @RequestMapping(path = "/edit-bottle", method = RequestMethod.GET)
-    public String editBottle(Model model){
+    public String editBottle(Model model, Integer id){
 
+        if(id != null){
+            model.addAttribute("id", id);
+        }
         return "bottles";
     }
 
+    /**
+     * Update bottle info
+     * @param session
+     * @param id
+     * @param bottleName
+     * @param bottleProducer
+     * @param bottleRegion
+     * @param bottleVintage
+     * @param bottleVariety
+     * @param bottleABV
+     * @return
+     * @throws Exception
+     */
     @RequestMapping(path = "/edit-bottle", method = RequestMethod.POST)
     public String editBottle(HttpSession session, Integer id, String bottleName, String bottleProducer,
                              String bottleRegion, int bottleVintage, String bottleVariety, float bottleABV) throws Exception {
@@ -100,6 +141,14 @@ public class BottleTrackerController {
         return "redirect:/";
     }
 
+    /**
+     * Log user in
+     * @param session
+     * @param userName
+     * @param password
+     * @return
+     * @throws Exception
+     */
     @RequestMapping(path="/login", method = RequestMethod.POST)
     public String login(HttpSession session, String userName, String password) throws
             Exception {
