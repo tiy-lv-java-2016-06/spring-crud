@@ -68,9 +68,9 @@ public class SpringCrudApplicationTests {
                     .param("bottleName", "Test Name")
                     .param("bottleProducer", "Test Producer")
                     .param("bottleRegion", "Test Region")
-                    .param("bottleVintage", "Test Vintage")
+                    .param("bottleVintage", "2004")
                     .param("bottleVariety", "Test Variety")
-                    .param("bottleABV", "Test ABV")
+                    .param("bottleABV", "14.0")
                     .sessionAttr("userName", "TestUserName")
         );
 

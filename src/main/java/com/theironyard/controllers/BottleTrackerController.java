@@ -37,6 +37,7 @@ public class BottleTrackerController {
         if(user != null){
             model.addAttribute("user", user);
         }
+
         List<Bottle> userBottleList = bottles.findByUser(user);
         model.addAttribute("userBottleList", userBottleList);
 
@@ -60,7 +61,7 @@ public class BottleTrackerController {
      */
     @RequestMapping(path="/create-bottle", method = RequestMethod.POST)
     public String createBottle(HttpSession session, String bottleName, String bottleProducer, String bottleRegion,
-                               int bottleVintage, String bottleVariety, float bottleABV) throws Exception {
+                               int bottleVintage, String bottleVariety, float bottleABV, Integer id) throws Exception {
 
         User user = userSessionGrabber(session);
         if(user == null){
@@ -68,6 +69,7 @@ public class BottleTrackerController {
         }
         Bottle bottle = new Bottle(bottleName, bottleProducer, bottleRegion, bottleVintage, bottleVariety,
                 bottleABV, user);
+
         bottles.save(bottle);
 
         return "redirect:/";
@@ -103,7 +105,7 @@ public class BottleTrackerController {
     public String editBottle(Model model, Integer id){
 
         if(id != null){
-            model.addAttribute("id", id);
+            model.addAttribute("bottle", bottles.getOne(id));
         }
         return "bottles";
     }
