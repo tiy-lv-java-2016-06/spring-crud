@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="bootstrap.min.css">
+    <title>Welcome to my C.R.U.D. Program</title>
+</head>
+    <body>
+    <div class="container">
+    {{^userName}}
+            <form action="/login" method="post">
+                <h1>Welcome to: Aww Crud</h1>
+                <input type="text" placeholder="Enter Username" name="userName">
+                <input type= "password" placeholder="Enter Password" name="password">
+                <button type="submit">Login</button>
+            </form>
+        {{/userName}}
+
+        {{#userName}}
+        <h1>Welcome {{userName}}!</h1>
+        <form action="/logout" method="post"><button type="submit" class="btn btn-danger">Logout</button></form>
+        <p>Your Cars:</p>
+
+        <div class="container">
+            <form action="/create-car" method="post">
+                <input  type="text" placeholder="Make" name="make"/>
+                <input type="text" placeholder="Model" name="model"/>
+                <input type="text" placeholder="Year" name="year"/>
+                <select name="drivetrain">
+                    <option selected value="RW">Rear Wheel Drive</option>
+                    <option value="FR">Front Wheel Drive</option>
+                    <option value="4WD">All Wheel Drive</option>
+                </select>
+                <button type="submit">Add car</button>
+            </form>
+
+            {{#userCars}}
+            <form action="/delete?carId={{Id}}" method="post">
+                <ul>
+                    <li class="list-group-item list-group-item-success">{{make}} - {{model}} - {{drivetrain}} - {{year}} ** <a href="/edit?carId={{Id}}" >Edit</a><button type="submit">Delete</button></li>
+                </ul>
+
+            </form>
+            {{/userCars}}
+
+        </div>
+        {{/userName}}
+        <h2>Here are the cars other Petrol-Heads have entered:</h2>
+        <ul>
+            {{#othersCars}}
+            <li>{{make}} - {{model}} - {{drivetrain}} - {{year}} - {{user.getName}}</li>
+            {{/othersCars}}
+        </ul>
+    </div>
+    </body>
+</html>
