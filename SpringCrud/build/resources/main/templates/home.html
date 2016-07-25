@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Home</title>
+</head>
+
+{{^user}}
+<h2> Welcome to SpringCRUD! </h2>
+<h3>Please login below!</h3> <p>*password is Case Sensitive!</p>
+
+<form action="/login" method="post">
+    <input type="text" placeholder="Enter Username" name="userName" required/>
+    <input type="password" placeholder="Enter Password" name="password" required/>
+    <button type="submit">Login</button>
+</form>
+{{/user}}
+
+{{#user}}
+Welcome, {{name}}
+<form action="/logout" method="post">
+    <button type="submit">Logout</button>
+</form>
+<br/>
+
+<form action="/create-restaurant" method="post">
+    <input type="text" placeholder="Restaurant Name" name="restaurantName"/>
+    <select name="menuType">
+        <option selected disabled>MenuType</option>
+        <option value="american">American</option>
+        <option value="mexican">Mexican</option>
+        <option value="italian">Italian</option>
+        <option value="chinese">Chinese</option>
+        <option value="thai">Thai</option>
+    </select>
+    <input type="text" placeholder="Restaurant Address" name="restaurantAddress"/>
+    <input type="number" placeholder="Restaurant Rating" name="restaurantRating"/>
+    <input type="hidden" value="{{id}}" name="id"/>
+    <button type="submit">Submit</button>
+</form>
+
+{{/user}}
+{{#user}}
+<h2> This is your current List </h2>
+<p>Feel free to create new entries, update, or delete entries as you would like!</p>
+<table>
+    <tr>
+        <th>Restaurant Name</th>
+        <th>MenuType</th>
+        <th>Restaurant Address</th>
+        <th>Restaurant Rating</th>
+    </tr>
+    {{#userRestaurantList}}
+    <tr>
+        <td>{{name}}</td>
+        <td>{{menuType}}</td>
+        <td>{{address}}</td>
+        <td>{{rating}}</td>
+        <td><a href="/edit?id={{id}}">Edit</a>
+            <input type="hidden" value="{{id}}" name="id"/>
+            <form action="/delete?id={{id}}" method="post">
+                <button type="submit">Delete</button>
+            </form></td>
+    </tr>
+    {{/userRestaurantList}}
+    {{/user}}
+</table>
+<br/><br/>
+<table>
+    <h2>Here is a list of other entries </h2>
+    <tr>
+        <th>User Name</th>
+        <th>Restaurant Name</th>
+        <th>MenuType</th>
+        <th>Restaurant Address</th>
+        <th>Restaurant Rating</th>
+    </tr>
+    {{#otherRestaurantList}}
+    <tr>
+        <td>{{user.getName}}</td>
+        <td>{{name}}</td>
+        <td>{{menuType}}</td>
+        <td>{{address}}</td>
+        <td>{{rating}}</td>
+    </tr>
+    {{/otherRestaurantList}}
+</table>
+
+
+</body>
+</html>
